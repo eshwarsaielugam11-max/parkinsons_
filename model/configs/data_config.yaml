@@ -37,3 +37,18 @@ validation_rules:
   disallow_null_label: true
   disallow_duplicate_recording_id: true
   enforce_known_speaker_id: true
+
+# Data Splitting Configuration (Speaker-Disjoint & Stratified)
+splitting:
+  group_key: "speaker_id"
+  random_seed: 42
+  stratify_by:
+    - "label"
+    - "sex"
+  train_val_test_ratios:
+    train: 0.50   # 4 speakers (2 PD, 2 HC)
+    val: 0.25     # 2 speakers (1 PD, 1 HC)
+    test: 0.25    # 2 speakers (1 PD, 1 HC)
+  cv_strategy: "GroupKFold"
+  n_cv_folds: 4
+  split_manifest_path: "model/artifacts/split_manifest_v1.0-20260823.json"

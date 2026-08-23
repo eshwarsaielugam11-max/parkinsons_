@@ -6,12 +6,13 @@
 - Phase 2
 - Phase 3
 - Phase 4
+- Phase 5
 
 ## Current Phase
-- Phase 4 (complete)
+- Phase 5 (complete)
 
 ## Next Phase
-- Phase 5
+- Phase 6
 
 ## Files Created
 - .gitignore
@@ -26,9 +27,14 @@
 - model/configs/data_config.yaml
 - model/notebooks/02_dataset_audit.ipynb
 - model/artifacts/data_manifest_v1.0-20260823.json
+- model/artifacts/split_manifest_v1.0-20260823.json
+- model/src/__init__.py
+- model/src/evaluation/__init__.py
+- model/src/evaluation/leakage_check.py
 
 ## Files Modified
 - PROJECT_STATE.md
+- model/configs/data_config.yaml
 - model/notebooks/02_dataset_audit.ipynb
 
 ## Tests Completed
@@ -40,6 +46,7 @@
 - Dataset schema validation, zero-null speaker_id/label test, and duplicate check in 02_dataset_audit.ipynb
 - Data manifest total_recordings count match with raw index (24/24 records)
 - Acoustic confound audit completed (Cramér's V = 0.00, device confound risk: LOW)
+- Data leakage and speaker disjointness verification passed with zero violations across Train/Val/Test splits and 4 CV folds (leakage_check.py)
 
 ## Known Issues
 - None (Acoustic confound audit confirmed zero device/environment confounding in baseline cohort)
@@ -61,6 +68,7 @@
 - Raw Index CSV: `/content/drive/MyDrive/pd_voice_project/artifacts/raw_index.csv`
 - Excluded Recordings CSV: `/content/drive/MyDrive/pd_voice_project/artifacts/excluded_recordings.csv`
 - Data Manifest JSON: `model/artifacts/data_manifest_v1.0-20260823.json`
+- Split Manifest JSON: `model/artifacts/split_manifest_v1.0-20260823.json`
 - Dataset Audit Report: `docs/research/DATASET.md`
 
 ## Environment Requirements
@@ -70,4 +78,4 @@
 - Google Drive mount at `/content/drive` for persistent storage
 
 ## Pending Tasks
-- Proceed to Phase 5: Leakage-Free Splitting & Stratified Cross-Validation
+- Proceed to Phase 6: Feature Extraction & Multi-View Representation Pipelines
