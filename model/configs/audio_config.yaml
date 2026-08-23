@@ -1,0 +1,32 @@
+# Audio Preprocessing Configuration
+# Standardized across training and deployment (Constraint RC-08)
+
+target_sample_rate: 16000
+channels: 1                 # Mono channel
+target_audio_format: "wav"
+
+# Voice Activity Detection (VAD) & Silence Trimming
+vad:
+  method: "energy"
+  top_db: 35.0              # Conservative silence threshold in dB
+  frame_length_ms: 30
+  hop_length_ms: 10
+  min_silence_duration_ms: 200
+  pad_ms: 100               # Padding around speech segments (preserve speech boundaries)
+  min_valid_speech_seconds: 0.5
+
+# Quality Assurance & Scoring Thresholds
+quality:
+  clipping_threshold: 0.999
+  max_clipping_ratio: 0.005      # Max allowable clipped sample ratio (0.5%)
+  min_snr_db: 8.0                # Minimum allowable estimated SNR in dB
+  min_duration_seconds: 0.8
+  max_duration_seconds: 60.0
+  min_quality_score: 0.60        # Composite score threshold [0, 1]
+
+# Loudness Normalization
+normalization:
+  method: "peak"                 # "peak" or "rms"
+  target_peak_level: 0.95        # Target peak amplitude (prevent inter-sample clipping)
+  target_rms_level: 0.1
+  reference_dbfs: -20.0

@@ -7,12 +7,13 @@
 - Phase 3
 - Phase 4
 - Phase 5
+- Phase 6
 
 ## Current Phase
-- Phase 5 (complete)
+- Phase 6 (complete)
 
 ## Next Phase
-- Phase 6
+- Phase 7
 
 ## Files Created
 - .gitignore
@@ -31,6 +32,16 @@
 - model/src/__init__.py
 - model/src/evaluation/__init__.py
 - model/src/evaluation/leakage_check.py
+- model/configs/audio_config.yaml
+- model/src/preprocessing/__init__.py
+- model/src/preprocessing/resample.py
+- model/src/preprocessing/vad.py
+- model/src/preprocessing/quality_check.py
+- model/src/preprocessing/normalize.py
+- model/src/preprocessing/pipeline.py
+- model/notebooks/03_preprocessing.ipynb
+- model/tests/__init__.py
+- model/tests/test_preprocessing.py
 
 ## Files Modified
 - PROJECT_STATE.md
@@ -47,6 +58,7 @@
 - Data manifest total_recordings count match with raw index (24/24 records)
 - Acoustic confound audit completed (Cramér's V = 0.00, device confound risk: LOW)
 - Data leakage and speaker disjointness verification passed with zero violations across Train/Val/Test splits and 4 CV folds (leakage_check.py)
+- Preprocessing unit and integration test suite passed (8/8 tests in test_preprocessing.py covering resampling, VAD, QA scoring, clipping detection, SNR estimation, and fold-local fitting)
 
 ## Known Issues
 - None (Acoustic confound audit confirmed zero device/environment confounding in baseline cohort)
@@ -78,4 +90,4 @@
 - Google Drive mount at `/content/drive` for persistent storage
 
 ## Pending Tasks
-- Proceed to Phase 6: Feature Extraction & Multi-View Representation Pipelines
+- Proceed to Phase 7: Baseline Acoustic Feature Extraction & Classical Classifiers
