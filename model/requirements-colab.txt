@@ -1,0 +1,23 @@
+# PyTorch Core & Audio
+torch>=2.1.0
+torchaudio>=2.1.0
+
+# Deep Learning Architectures
+timm>=0.9.12
+
+# Audio Feature Extraction & Signal Processing
+librosa>=0.10.1
+soundfile>=0.12.1
+praat-parselmouth>=0.4.3
+opensmile>=2.5.0
+
+# Automatic Speech Recognition & Alignment
+faster-whisper>=1.0.0
+
+# Explainability & Attribution
+shap>=0.44.0
+captum>=0.7.0
+
+# Machine Learning & Utilities
+scikit-learn>=1.3.2
+pyyaml>=6.0.1
