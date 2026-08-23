@@ -1,0 +1,39 @@
+# Dataset Acquisition & Organization Configuration
+dataset_name: "pd_voice_corpus"
+dataset_version: "v1.0-20260823"
+raw_data_root: "/content/drive/MyDrive/pd_voice_project/raw_data"
+processed_data_root: "/content/drive/MyDrive/pd_voice_project/processed"
+raw_index_path: "/content/drive/MyDrive/pd_voice_project/artifacts/raw_index.csv"
+excluded_index_path: "/content/drive/MyDrive/pd_voice_project/artifacts/excluded_recordings.csv"
+
+# Target Organization Layout
+# Directory pattern: {raw_data_root}/{dataset_name}/{speaker_id}/{recording_id}.wav
+file_naming_convention: "{dataset_name}/{speaker_id}/{recording_id}.wav"
+
+# Index Schema & Field Specifications
+schema:
+  required_columns:
+    - recording_id
+    - speaker_id
+    - file_path
+    - label
+    - task_type
+    - age_bucket
+    - sex
+    - device_or_source
+    - notes
+  label_source_column: "label"
+  valid_labels:
+    - "PD"   # Parkinson's Disease positive
+    - "HC"   # Healthy Control negative
+  valid_task_types:
+    - "vowel"        # Sustained vowel phonation (e.g. /a/, /i/, /u/)
+    - "sentence"     # Standardized read sentence / prosody test
+    - "continuous"   # Spontaneous monologue / continuous speech
+
+# Data Quality and Integrity Checks
+validation_rules:
+  disallow_null_speaker_id: true
+  disallow_null_label: true
+  disallow_duplicate_recording_id: true
+  enforce_known_speaker_id: true
