@@ -1,0 +1,71 @@
+{
+  "manifest_version": "1.0",
+  "dataset_name": "pd_voice_corpus",
+  "dataset_version": "v1.0-20260823",
+  "created_at_utc": "2026-08-23T15:54:00Z",
+  "total_recordings": 24,
+  "total_speakers": 8,
+  "total_excluded_recordings": 1,
+  "class_balance": {
+    "speaker_level": {
+      "PD": 4,
+      "HC": 4
+    },
+    "recording_level": {
+      "PD": 12,
+      "HC": 12
+    }
+  },
+  "task_distribution": {
+    "vowel": 8,
+    "sentence": 8,
+    "continuous": 8
+  },
+  "demographic_distribution": {
+    "sex": {
+      "M": 4,
+      "F": 4
+    },
+    "age_bucket": {
+      "50-59": 2,
+      "60-69": 4,
+      "70-79": 2
+    }
+  },
+  "device_distribution": {
+    "pd_voice_corpus": 24
+  },
+  "confounds_audit": {
+    "device_confound_risk": "LOW",
+    "cramers_v_label_vs_device": 0.0,
+    "sex_confound_correlation": 0.0,
+    "severe_confound_detected": false
+  },
+  "audio_quality_summary": {
+    "channels": 1,
+    "target_sample_rate_hz": 16000,
+    "clipping_detected_count": 0,
+    "clipping_rate_pct": 0.0,
+    "mean_duration_seconds": 6.8,
+    "mean_silence_ratio_pct": 8.5
+  },
+  "checksums": {
+    "raw_index_total_rows": 24,
+    "speaker_id_list": [
+      "SPK_PD_001",
+      "SPK_PD_002",
+      "SPK_PD_003",
+      "SPK_PD_004",
+      "SPK_HC_001",
+      "SPK_HC_002",
+      "SPK_HC_003",
+      "SPK_HC_004"
+    ]
+  },
+  "governing_constraints": [
+    "RC-06-SPEAKER-LEVEL-EVAL",
+    "RC-07-SPEAKER-DISJOINT-SPLITS",
+    "RC-09-SUBGROUP-CONFOUND-REPORTING",
+    "RC-10-NON-CAUSAL-ATTRIBUTION"
+  ]
+}

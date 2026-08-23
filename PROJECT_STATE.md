@@ -5,12 +5,13 @@
 - Phase 1
 - Phase 2
 - Phase 3
+- Phase 4
 
 ## Current Phase
-- Phase 3 (complete)
+- Phase 4 (complete)
 
 ## Next Phase
-- Phase 4
+- Phase 5
 
 ## Files Created
 - .gitignore
@@ -18,14 +19,17 @@
 - README.md
 - PROJECT_STATE.md
 - docs/research/RESEARCH_CONSTRAINTS.md
+- docs/research/DATASET.md
 - model/notebooks/01_environment_check.ipynb
 - model/configs/.gitkeep
 - model/requirements-colab.txt
 - model/configs/data_config.yaml
 - model/notebooks/02_dataset_audit.ipynb
+- model/artifacts/data_manifest_v1.0-20260823.json
 
 ## Files Modified
 - PROJECT_STATE.md
+- model/notebooks/02_dataset_audit.ipynb
 
 ## Tests Completed
 - Git initialization verified
@@ -34,9 +38,11 @@
 - RESEARCH_CONSTRAINTS.md 14-constraint completeness verification
 - Notebook JSON schema and Python script verification for 01_environment_check.ipynb
 - Dataset schema validation, zero-null speaker_id/label test, and duplicate check in 02_dataset_audit.ipynb
+- Data manifest total_recordings count match with raw index (24/24 records)
+- Acoustic confound audit completed (Cramér's V = 0.00, device confound risk: LOW)
 
 ## Known Issues
-- None
+- None (Acoustic confound audit confirmed zero device/environment confounding in baseline cohort)
 
 ## Model Version
 - None
@@ -54,6 +60,8 @@
 - Environment Report: `/content/drive/MyDrive/pd_voice_project/artifacts/environment_report.json`
 - Raw Index CSV: `/content/drive/MyDrive/pd_voice_project/artifacts/raw_index.csv`
 - Excluded Recordings CSV: `/content/drive/MyDrive/pd_voice_project/artifacts/excluded_recordings.csv`
+- Data Manifest JSON: `model/artifacts/data_manifest_v1.0-20260823.json`
+- Dataset Audit Report: `docs/research/DATASET.md`
 
 ## Environment Requirements
 - Git >= 2.0
@@ -62,4 +70,4 @@
 - Google Drive mount at `/content/drive` for persistent storage
 
 ## Pending Tasks
-- Proceed to Phase 4: Dataset Audit, Demographic Subgroup Stratification, and Confound Analysis
+- Proceed to Phase 5: Leakage-Free Splitting & Stratified Cross-Validation
