@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+pydantic
+sqlalchemy
+asyncpg
+python-multipart
+websockets
+chromadb
+anthropic
+python-dotenv
+pytest
+httpx
+pandas
+scikit-learn
+alembic
+psycopg2-binary
+chromadb

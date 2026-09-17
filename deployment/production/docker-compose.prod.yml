@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: pd_voice_prod_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-pd_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?FATAL: POSTGRES_PASSWORD must be provided}
+      POSTGRES_DB: ${POSTGRES_DB:-pd_voice_prod}
+    volumes:
+      - prod_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-pd_admin} -d ${POSTGRES_DB:-pd_voice_prod}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2048M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  backend:
+    image: pd-voice-backend:${APP_VERSION:-v1.0.0}
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+    container_name: pd_voice_prod_backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_VERSION=${MODEL_VERSION:-model_v1.0.0}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:?FATAL: ANTHROPIC_API_KEY must be provided}
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-pd_admin}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-pd_voice_prod}
+      - VECTOR_DB_PATH=/app/chroma_db
+      - BACKEND_CORS_ORIGINS=${BACKEND_CORS_ORIGINS:-["https://app.pdvoice.internal","http://localhost:3000"]}
+    volumes:
+      - prod_chroma_data:/app/chroma_db
+      - ../../model/exported:/app/model/exported:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 4096M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  frontend:
+    image: pd-voice-frontend:${APP_VERSION:-v1.0.0}
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.frontend
+    container_name: pd_voice_prod_frontend
+    restart: always
+    ports:
+      - "80:3000"
+      - "443:3000"
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+
+volumes:
+  prod_postgres_data:
+  prod_chroma_data:

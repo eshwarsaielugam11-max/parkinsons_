@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: pd_voice_local_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pd_user
+      POSTGRES_PASSWORD: pd_password
+      POSTGRES_DB: pd_voice_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pd_user -d pd_voice_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.backend
+    container_name: pd_voice_local_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_VERSION=model_v1.0.0
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-mock_key_for_testing}
+      - DATABASE_URL=postgresql://pd_user:pd_password@db:5432/pd_voice_db
+      - VECTOR_DB_PATH=/app/chroma_db
+      - BACKEND_CORS_ORIGINS=["http://localhost:3000","http://127.0.0.1:3000"]
+    volumes:
+      - local_chroma_data:/app/chroma_db
+      - ../../model/exported:/app/model/exported:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile.frontend
+    container_name: pd_voice_local_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  local_postgres_data:
+  local_chroma_data:
