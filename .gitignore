@@ -12,6 +12,8 @@ __pycache__/
 env/
 venv/
 .venv/
+pd-voice-backend/
+.pytest_cache/
 build/
 develop-eggs/
 dist/
@@ -44,7 +46,14 @@ checkpoint-*/
 *.flac
 *.ogg
 raw_audio/
+raw_data/
 datasets/raw/
+
+# Databases and Vector Stores
+*.db
+*.sqlite
+*.sqlite3
+chroma_db/
 
 # Model binaries and large artifacts (track manifests / metadata only)
 artifacts/*.bin
@@ -61,3 +70,5 @@ artifacts/*.bin
 # Operating System
 .DS_Store
 Thumbs.db
+*.orig
+*.patch
