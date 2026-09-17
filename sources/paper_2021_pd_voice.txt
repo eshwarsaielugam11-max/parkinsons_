@@ -1,0 +1,1 @@
+This paper discusses voice biomarkers for Parkinson's disease. It focuses on acoustic features such as jitter, shimmer, and speech rate. The study shows that increased jitter and shimmer are indicative of vocal fold dysfunction, while reduced speech rate correlates with motor impairment. These metrics are valuable for early detection of Parkinson's disease.

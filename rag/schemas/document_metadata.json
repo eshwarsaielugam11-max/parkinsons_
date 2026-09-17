@@ -1,0 +1,34 @@
+{
+  "approved_sources": [
+    {
+      "source_id": "paper_2021_pd_voice",
+      "title": "Voice biomarkers for Parkinson's disease diagnosis",
+      "authors": ["Doe J.", "Smith A."],
+      "year": 2021,
+      "source_type": "peer_reviewed",
+      "trust_tier": "high",
+      "available": true,
+      "citation": "Doe J., Smith A. (2021). Voice biomarkers for Parkinson's disease diagnosis. Journal of Neurology."
+    },
+    {
+      "source_id": "guideline_2022_clinical",
+      "title": "Clinical guidelines for Parkinson's disease assessment",
+      "authors": ["National Neurology Board"],
+      "year": 2022,
+      "source_type": "guideline",
+      "trust_tier": "high",
+      "available": true,
+      "citation": "National Neurology Board (2022). Clinical guidelines for Parkinson's disease assessment."
+    },
+    {
+      "source_id": "model_card",
+      "title": "PD Voice Classification Model Card",
+      "authors": ["Project Team"],
+      "year": 2025,
+      "source_type": "project_document",
+      "trust_tier": "medium",
+      "available": false,
+      "citation": "Project Team (2025). PD Voice Classification Model Card."
+    }
+  ]
+}
